@@ -16,10 +16,10 @@ args = {
 
     'manual_seed': 777,
 
-    'n_fold': 3,
+    'n_fold': 1,
 
     'num_classes': 2,
-    'num_train_epochs': 50,
+    'num_train_epochs': 5,
 
     'reduce_lr_on_plateau': True,
     'reduce_lr_on_plateau_factor': 0.6,
