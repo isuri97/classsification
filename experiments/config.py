@@ -19,7 +19,7 @@ args = {
     'n_fold': 1,
 
     'num_classes': 2,
-    'num_train_epochs': 5,
+    'num_train_epochs': 25,
 
     'reduce_lr_on_plateau': True,
     'reduce_lr_on_plateau_factor': 0.6,

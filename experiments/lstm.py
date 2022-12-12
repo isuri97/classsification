@@ -6,6 +6,7 @@ import re
 from offensive_nn.offensive_nn_model import OffensiveNNModel
 from offensive_nn.util.print_stat import print_information
 from sklearn.model_selection import train_test_split
+from offensive_nn.util.label_converter import encode, decode
 import numpy as np
 from config import args
 
@@ -18,6 +19,7 @@ arguments = parser.parse_args()
 
 df = pd.read_csv(arguments.train, sep=",", index_col=0)
 df.dropna(subset=['testimony'], inplace=True)
+df.dropna(subset=['A1'], inplace=True)
 
 li = []
 # regext after the content text
@@ -43,10 +45,19 @@ max_seq_len = np.round(df['doc_len'].mean() + df['doc_len'].std()).astype(int)
 df = df.rename(columns={'new': 'text','A1': 'labels'})
 
 test_sentences = df['text'].tolist()
+
 test_preds = np.zeros((len(df), args["n_fold"]))
+
+
+
 
 train_set = df
 test_set = df
+
+
+
+
+test_set['labels'] = encode(test_set['labels'])
 for i in range(args["n_fold"]):
     train_set, validation_set = train_test_split(train_set, test_size=0.2, random_state=args["manual_seed"])
     model = OffensiveNNModel(model_type_or_path=arguments.algorithm, embedding_model_name=arguments.model_name,
