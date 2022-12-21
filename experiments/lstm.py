@@ -3,12 +3,13 @@ import pandas as pd
 import argparse
 import re
 
+
 from offensive_nn.offensive_nn_model import OffensiveNNModel
 from offensive_nn.util.print_stat import print_information
 from sklearn.model_selection import train_test_split
 from offensive_nn.util.label_converter import encode, decode
 import numpy as np
-from config import args
+from experiments.config import args
 
 parser = argparse.ArgumentParser(
     description='''evaluates multiple models  ''')
